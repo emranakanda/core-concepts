@@ -15,6 +15,7 @@ function App() {
     <div className="App">
       <header className="App-header">
       <Counter></Counter>
+      <Users></Users>
       <p>List of Nayoks</p>
           <ul>
               {
@@ -44,6 +45,26 @@ function App() {
         <h1>Count : {count} </h1>
       <button onClick={() => setCount(count + 1)}>Increased</button>
       <button onClick={() => setCount(count - 1)}>Decrease</button>
+      </div>
+    )
+  }
+
+  function Users(){
+    const [users, setUsers] = useState([]);
+    useState(()=>{
+      fetch('https://jsonplaceholder.typicode.com/users')
+      .then(response => response.json())
+      .then(data => setUsers(data));
+    }, [])
+
+    return(
+      <div>
+        <h3>Dynamic Data : {users.length}</h3>
+        <ul>
+          {
+            users.map(user => <li>{user.email}</li>)
+          }
+        </ul>
       </div>
     )
   }
